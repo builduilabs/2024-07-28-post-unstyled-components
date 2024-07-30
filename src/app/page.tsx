@@ -1,113 +1,90 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import * as ResizablePanel from './resizable-panel';
+
+export default function Page() {
+  let [state, setState] = useState(3);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <div className="max-w-xs mx-auto mt-4">
+      <div className="flex gap-2">
+        <input
+          type="range"
+          value={state}
+          onChange={(e) => setState(+e.target.value)}
+          min={0}
+          max={7}
         />
+        <p>{state}</p>
+        {/* <button
+          className="border border-gray-300 rounded px-3 py-1"
+          onClick={() => setState('a')}
+        >
+          Panel 1
+        </button>
+        <button
+          className="border border-gray-300 rounded px-3 py-1"
+          onClick={() => setState('b')}
+        >
+          Panel 2
+        </button> */}
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="max-w-sm mx-auto bg-blue-500 rounded-lg text-white mt-8 p-8">
+        <ResizablePanel.Root value={`${state}`}>
+          {planets.map((planet, i) => (
+            <ResizablePanel.Content value={`${i}`} key={i}>
+              <div>
+                <p className="text-2xl font-bold">{planet.name}</p>
+                <p className="mt-4">{planet.summary}</p>
+              </div>
+            </ResizablePanel.Content>
+          ))}
+        </ResizablePanel.Root>
       </div>
-    </main>
+    </div>
   );
 }
+
+const planets = [
+  {
+    name: 'Mercury',
+    summary:
+      'Mercury, the smallest planet, is closest to the Sun with a rocky surface and extreme temperatures.',
+  },
+  {
+    name: 'Venus',
+    summary:
+      "Venus is often called Earth's twin due to its similar size and composition. However, its thick, toxic atmosphere creates a severe greenhouse effect, leading to extremely high surface temperatures and pressure.",
+  },
+  {
+    name: 'Earth',
+    summary:
+      'Earth, our home planet, is the only known planet to support life, featuring diverse ecosystems and climates.',
+  },
+  {
+    name: 'Mars',
+    summary:
+      'Mars, the Red Planet, has fascinated humans for centuries with its potential to support life. It has a thin atmosphere, surface features reminiscent of both Earth and the Moon, and the tallest volcano and largest canyon in the solar system.',
+  },
+  {
+    name: 'Jupiter',
+    summary:
+      "Jupiter, the gas giant, is the largest planet in our solar system. It is known for its Great Red Spot, a massive storm that has raged for centuries. Jupiter's strong magnetic field and dozens of moons, including the largest moon Ganymede, make it a fascinating planet.",
+  },
+  {
+    name: 'Saturn',
+    summary:
+      'Saturn is renowned for its beautiful ring system, composed of ice and rock particles. It is a gas giant with a thick atmosphere, numerous moons, and a unique feature—hexagonal storm patterns at its poles.',
+  },
+  {
+    name: 'Uranus',
+    summary:
+      'Uranus is a blue-green gas giant with a tilted axis, causing it to rotate on its side. This unusual orientation leads to extreme seasonal variations. Its atmosphere is mostly hydrogen and helium, with traces of methane giving it its color.',
+  },
+  {
+    name: 'Neptune',
+    summary:
+      'Neptune, the farthest known planet from the Sun, is a deep blue gas giant. It is known for having the strongest winds in the solar system, with speeds reaching over 1,200 miles per hour. Neptune also has a faint ring system and 14 known moons, with Triton being the largest.',
+  },
+];
