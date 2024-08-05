@@ -1,19 +1,24 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { useFormStatus } from 'react-dom';
+import { FormEvent, useState } from 'react';
 import { Spinner } from '../spinner';
 
 export default function Page() {
-  async function handleSignup(formData: FormData) {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  let [isLoading, setIsLoading] = useState(false);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    setIsLoading(true);
+    await signUp();
+    setIsLoading(false);
   }
 
   return (
     <div className="max-w-lg mx-auto mt-8">
       <h1 className="text-2xl font-semibold">Sign up for our newsletter</h1>
 
-      <form action={handleSignup} className="mt-4 flex flex-col">
+      <form onSubmit={handleSubmit} className="mt-4 flex flex-col">
         <label className="text-sm" htmlFor="email">
           Email
         </label>
@@ -26,28 +31,24 @@ export default function Page() {
         />
 
         <div className="mt-4">
-          <SaveButton />
+          <button
+            className="group relative bg-amber-400 enabled:hover:bg-amber-300 disabled:bg-amber-500 rounded px-5 py-2 font-medium text-black"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading && (
+              <div className="absolute inset-0 flex justify-center items-center">
+                <Spinner />
+              </div>
+            )}
+            <span className="group-disabled:invisible">Sign up</span>
+          </button>
         </div>
       </form>
     </div>
   );
 }
 
-function SaveButton() {
-  let { pending } = useFormStatus();
-
-  return (
-    <button
-      className="group relative bg-amber-400 enabled:hover:bg-amber-300 disabled:bg-amber-500 rounded px-5 py-2 font-medium text-black"
-      type="submit"
-      disabled={pending}
-    >
-      {pending && (
-        <div className="absolute inset-0 flex justify-center items-center">
-          <Spinner />
-        </div>
-      )}
-      <span className="group-disabled:invisible">Sign up</span>
-    </button>
-  );
+async function signUp() {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 }

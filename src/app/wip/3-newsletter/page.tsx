@@ -1,8 +1,8 @@
 'use client';
 
-import { ReactNode } from 'react';
 import { useFormStatus } from 'react-dom';
-import { Spinner } from '../spinner';
+import { ReactNode } from 'react';
+import { Spinner } from '@/app/spinner';
 
 export default function Page() {
   async function handleSignup(formData: FormData) {
@@ -26,42 +26,29 @@ export default function Page() {
         />
 
         <div className="mt-4">
-          <SaveButton />
+          <button
+            className="bg-amber-400 enabled:hover:bg-amber-300 disabled:bg-amber-500 rounded px-5 py-2 font-medium text-black"
+            type="submit"
+          >
+            <Loading>Sign up</Loading>
+          </button>
         </div>
       </form>
     </div>
   );
 }
 
-function SaveButton() {
+function Loading({ children }: { children: ReactNode }) {
   let { pending } = useFormStatus();
 
   return (
-    <button
-      className="group relative bg-amber-400 enabled:hover:bg-amber-300 disabled:bg-amber-500 rounded px-5 py-2 font-medium text-black"
-      type="submit"
-      disabled={pending}
-    >
-      <Loading loading={pending}>Sign up</Loading>
-    </button>
-  );
-}
-
-function Loading({
-  children,
-  loading = true,
-}: {
-  children: ReactNode;
-  loading?: boolean;
-}) {
-  return (
     <span className="inline-flex items-center justify-center relative">
-      {loading && (
+      {pending && (
         <div className="absolute inset-0 flex justify-center items-center">
           <Spinner />
         </div>
       )}
-      <span className={loading ? 'invisible' : ''}>{children}</span>
+      <span className={pending ? 'invisible' : ''}>{children}</span>
     </span>
   );
 }
