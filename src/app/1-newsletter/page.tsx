@@ -15,7 +15,7 @@ export default function Page() {
   }
 
   return (
-    <div className="max-w-lg mx-auto mt-8">
+    <div className="max-w-lg mx-auto">
       <h1 className="text-2xl font-semibold">Sign up for our newsletter</h1>
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col">
@@ -37,9 +37,9 @@ export default function Page() {
             disabled={isLoading}
           >
             {isLoading && (
-              <div className="absolute inset-0 flex justify-center items-center">
+              <span className="absolute inset-0 flex justify-center items-center">
                 <Spinner />
-              </div>
+              </span>
             )}
             <span className="group-disabled:invisible">Sign up</span>
           </button>

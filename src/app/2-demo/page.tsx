@@ -15,7 +15,7 @@ export default function Page() {
   }
 
   return (
-    <div className="max-w-sm mx-auto mt-8">
+    <div className="max-w-sm mx-auto">
       <div className="bg-white rounded-lg shadow p-4 text-center">
         <h1 className="text-2xl font-semibold">Invoice #142</h1>
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col">
