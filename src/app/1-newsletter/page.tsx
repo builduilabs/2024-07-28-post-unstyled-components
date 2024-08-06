@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { FormEvent, useState } from 'react';
-import { Spinner } from '../spinner';
+import { FormEvent, useState } from "react";
+import { Spinner } from "../spinner";
 
 export default function Page() {
-  let [isLoading, setIsLoading] = useState(false);
+  let [isLoading, setIsLoading] = useState(true);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -15,7 +15,7 @@ export default function Page() {
   }
 
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="mx-auto max-w-lg">
       <h1 className="text-2xl font-semibold">Sign up for our newsletter</h1>
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col">
@@ -23,7 +23,7 @@ export default function Page() {
           Email
         </label>
         <input
-          className="mt-1 px-2 py-1 border rounded border-gray-300"
+          className="mt-1 rounded border border-gray-300 px-2 py-1 focus:outline-amber-400"
           type="email"
           placeholder="you@acme.com"
           name="email"
@@ -32,12 +32,12 @@ export default function Page() {
 
         <div className="mt-4">
           <button
-            className="group relative bg-amber-400 enabled:hover:bg-amber-300 disabled:bg-amber-500 rounded px-5 py-2 font-medium text-black"
+            className="group relative rounded bg-amber-400 px-5 py-2 font-medium text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 enabled:hover:bg-amber-300 disabled:bg-amber-500"
             type="submit"
             disabled={isLoading}
           >
             {isLoading && (
-              <span className="absolute inset-0 flex justify-center items-center">
+              <span className="absolute inset-0 flex items-center justify-center">
                 <Spinner />
               </span>
             )}
