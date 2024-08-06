@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ComponentProps, ReactNode, useState } from "react";
 import { Spinner } from "../spinner";
 
 export default function Page() {
@@ -31,7 +31,8 @@ export default function Page() {
       <LoadingButton
         onClick={handleSignUp}
         loading={isSigningUp}
-        className="rounded bg-amber-400 px-5 py-2 font-medium text-black hover:bg-amber-300"
+        type="submit"
+        className="rounded bg-amber-400 px-5 py-2 font-medium text-black enabled:hover:bg-amber-300 disabled:grayscale"
       >
         Sign up
       </LoadingButton>
@@ -39,7 +40,8 @@ export default function Page() {
       <LoadingButton
         onClick={handleSendNow}
         loading={isSending}
-        className="rounded bg-sky-500 px-5 py-2 text-sm font-semibold text-white hover:bg-sky-500"
+        type="submit"
+        className="rounded bg-sky-500 px-5 py-2 text-sm font-semibold text-white enabled:hover:bg-sky-600 disabled:grayscale"
       >
         Send now
       </LoadingButton>
@@ -47,7 +49,8 @@ export default function Page() {
       <LoadingButton
         onClick={handleCheckout}
         loading={isCheckingOut}
-        className="rounded bg-emerald-500 px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-600"
+        type="submit"
+        className="rounded-full border-2 border-emerald-500 bg-white px-5 py-2 text-sm font-bold text-emerald-600 enabled:hover:bg-emerald-50 disabled:grayscale"
       >
         Complete purchase
       </LoadingButton>
@@ -57,21 +60,20 @@ export default function Page() {
 
 function LoadingButton({
   loading,
-  className,
-  onClick,
   children,
+  className,
+  ...rest
 }: {
   loading: boolean;
-  className: string;
-  onClick: () => void;
   children: ReactNode;
-}) {
+  className: string;
+} & ComponentProps<"button">) {
   return (
-    <button className={`relative ${className}`} onClick={onClick}>
+    <button {...rest} className={`${className} relative`} disabled={loading}>
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center">
+        <span className="absolute inset-0 flex items-center justify-center">
           <Spinner />
-        </div>
+        </span>
       )}
 
       <span className={loading ? "invisible" : ""}>{children}</span>

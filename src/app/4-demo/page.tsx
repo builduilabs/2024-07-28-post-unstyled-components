@@ -1,36 +1,55 @@
-'use client';
+"use client";
 
-import { ReactNode, useState } from 'react';
-import { Spinner } from '../spinner';
+import { ReactNode, useState } from "react";
+import { Spinner } from "../spinner";
 
 export default function Page() {
   let [isSigningUp, setIsSigningUp] = useState(false);
   let [isSending, setIsSending] = useState(false);
 
-  return (
-    <div className="max-w-sm mx-auto flex gap-4 justify-center">
-      <LoadingButton loading={isSigningUp}>Sign up</LoadingButton>
+  async function handleSignUp() {
+    setIsSigningUp(true);
+    await sleep(1000);
+    setIsSigningUp(false);
+  }
 
-      <LoadingButton loading={isSending}>Send now</LoadingButton>
+  async function handleSendNow() {
+    setIsSending(true);
+    await sleep(1000);
+    setIsSending(false);
+  }
+
+  return (
+    <div className="mx-auto flex max-w-sm justify-center gap-4">
+      <LoadingButton loading={isSigningUp} onClick={handleSignUp}>
+        Sign up
+      </LoadingButton>
+
+      <LoadingButton loading={isSending} onClick={handleSendNow}>
+        Send now
+      </LoadingButton>
     </div>
   );
 }
 
 function LoadingButton({
+  onClick,
   loading,
   children,
 }: {
+  onClick: () => void;
   loading: boolean;
   children: ReactNode;
 }) {
   return (
-    <button className="relative">
+    <button onClick={onClick} className="relative">
       {loading && (
-        <div className="absolute inset-0 flex justify-center items-center">
+        <span className="absolute inset-0 flex items-center justify-center">
           <Spinner />
-        </div>
+        </span>
       )}
-      <span className={loading ? 'invisible' : ''}>{children}</span>
+
+      <span className={loading ? "invisible" : ""}>{children}</span>
     </button>
   );
 }

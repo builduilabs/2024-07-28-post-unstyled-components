@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import { ReactNode, useState } from 'react';
-import { Spinner } from '../spinner';
+import { ReactNode, useState } from "react";
+import { Spinner } from "../spinner";
 
 export default function Page() {
   let [isSigningUp, setIsSigningUp] = useState(false);
   let [isSending, setIsSending] = useState(false);
+  let [isCheckingOut, setIsCheckingOut] = useState(false);
 
   async function handleSignUp() {
     setIsSigningUp(true);
@@ -19,12 +20,18 @@ export default function Page() {
     setIsSending(false);
   }
 
+  async function handleCheckout() {
+    setIsCheckingOut(true);
+    await sleep(1000);
+    setIsCheckingOut(false);
+  }
+
   return (
-    <div className="max-w-sm mx-auto flex gap-4 justify-center">
+    <div className="mx-auto flex max-w-md justify-center gap-4">
       <LoadingButton
         onClick={handleSignUp}
         loading={isSigningUp}
-        className="bg-amber-400 enabled:hover:bg-amber-300 disabled:bg-amber-500 rounded px-5 py-2 font-medium text-black"
+        className="rounded bg-amber-400 px-5 py-2 font-medium text-black hover:bg-amber-300"
       >
         Sign up
       </LoadingButton>
@@ -32,9 +39,17 @@ export default function Page() {
       <LoadingButton
         onClick={handleSendNow}
         loading={isSending}
-        className="text-sm bg-sky-400 enabled:hover:bg-sky-500 disabled:bg-sky-500 rounded px-5 py-2 font-semibold text-white leading-6"
+        className="rounded bg-sky-500 px-5 py-2 text-sm font-semibold text-white hover:bg-sky-500"
       >
         Send now
+      </LoadingButton>
+
+      <LoadingButton
+        onClick={handleCheckout}
+        loading={isCheckingOut}
+        className="rounded-full border-2 border-emerald-500 bg-white px-5 py-2 text-sm font-bold text-emerald-600 hover:bg-emerald-50"
+      >
+        Complete purchase
       </LoadingButton>
     </div>
   );
@@ -54,12 +69,12 @@ function LoadingButton({
   return (
     <button className={`relative ${className}`} onClick={onClick}>
       {loading && (
-        <div className="absolute inset-0 flex justify-center items-center">
+        <div className="absolute inset-0 flex items-center justify-center">
           <Spinner />
         </div>
       )}
 
-      <span className={loading ? 'invisible' : ''}>{children}</span>
+      <span className={loading ? "invisible" : ""}>{children}</span>
     </button>
   );
 }
