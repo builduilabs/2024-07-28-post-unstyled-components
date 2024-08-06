@@ -27,7 +27,7 @@ export default function Page() {
   }
 
   return (
-    <div className="mx-auto flex max-w-md justify-center gap-4">
+    <div className="mx-auto flex max-w-md flex-col justify-center gap-4 sm:flex-row">
       <LoadingButton
         onClick={handleSignUp}
         loading={isSigningUp}
