@@ -32,7 +32,7 @@ export default function Page() {
         onClick={handleSignUp}
         loading={isSigningUp}
         type="submit"
-        className="rounded bg-amber-400 px-5 py-2 font-medium text-black hover:bg-amber-300 disabled:bg-gray-400 disabled:text-white"
+        className="rounded bg-amber-400 px-5 py-2 font-medium text-black hover:bg-amber-300 disabled:bg-gray-300 disabled:text-white"
       >
         Sign up
       </LoadingButton>

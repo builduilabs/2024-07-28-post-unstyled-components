@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { Spinner } from "../spinner";
 
 export default function Page() {
-  let [isLoading, setIsLoading] = useState(true);
+  let [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
